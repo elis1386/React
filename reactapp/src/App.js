@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import {Message} from './components/Message';
+import {Message} from './components/Message'
+import {Counter} from './components/Counter'
 
 
 function App() {
@@ -13,14 +14,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <Message message={text}  onMessageClick={handleClick}/>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Counter />
       </header>
     </div>
   );
