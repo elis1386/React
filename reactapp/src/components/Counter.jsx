@@ -9,6 +9,18 @@ export const Counter = () => {   // functional component
 useEffect(() => {
 console.log('------Like did mount------') // if array is a second argument, without array it will work + did update
 },[]) //dependencies array
+
+// useEffect(() => {
+//     console.log('------Like did mount------') // if array is a second argument,has some variable it will work like did moutn + ex.count cahnge
+//     },[count])
+
+// useEffect(() => {
+//     return() => { //has some func
+//     console.log('unmounting') // like unMounting
+//     }
+// },[])
+
+
 return(
         <div>
             <h3>{count}</h3>

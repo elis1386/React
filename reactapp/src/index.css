@@ -15,5 +15,9 @@ code {
   color: beige;
 }
 .btn{
-  background-color: cadetblue;
+  background-color: rgb(180, 223, 224);
+  border-color: rgb(180, 223, 224);
+}
+.add{
+  margin-top: 3rem;
 }
