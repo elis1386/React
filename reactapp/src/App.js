@@ -1,29 +1,43 @@
-import { useState } from 'react';
-import './App.css';
-import {Message} from './components/Message';
+import React, { useCallback, useEffect, useState } from 'react';
+import './App.css'
+import {Message} from './components/Message'
+import {Addform} from './components/Addform'
+import { MessagesList } from './components/MessagesList';
+import { Authors } from './utils/costans';
 
 
-function App() {
-  const [text, setText]= useState("We start learn REACT")
-
-  const handleClick = () => {
-    setText("And I like it!")
+const mesArray = [
+  {
+    text: 'Good morning',
+    author: Authors.human
   }
+]
+function App() {
+  const [messages, setMessages] = useState(mesArray)
+
+  const handleSendMessage = useCallback((newMessage) => {
+      setMessages(prevMessages => [...prevMessages, newMessage])
+  },[messages])
+  
+  useEffect(() => {
+    if(messages.length && messages[messages.length -1].author !== Authors.bot){
+     const timeout = setTimeout(
+       () => handleSendMessage(
+      {
+        author: Authors.bot, 
+        text: "Hello, I'm a bot",
+        id: Date.now()
+      }), 1500)
+      return () => clearTimeout(timeout)
+    }
+  },[messages])
+
   return (
     <div className="App">
       <header className="App-header">
-        <Message message={text}  onMessageClick={handleClick}/>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Message />
+        <MessagesList messages={messages} />
+        <Addform  onSendMessage={handleSendMessage}/>
       </header>
     </div>
   );
