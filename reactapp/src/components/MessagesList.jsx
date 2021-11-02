@@ -1,7 +1,11 @@
-import React, {useState} from "react";
+import React from "react";
 
-export const MessagesList = () => {
-    const[messages, setMessages] = useState([])
-    
-   return messages.map((message) => <div>{message}</div>)
-}
+export const MessagesList = ({messages}) => (
+   <div>
+       {messages.map((message => 
+       <div>
+           <span>{message.author}</span> : <span>{message.text}</span>
+        </div>
+        ))}
+       </div>
+)
