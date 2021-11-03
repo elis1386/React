@@ -21,3 +21,10 @@ code {
 .add{
   margin-top: 3rem;
 }
+
+.input-form{
+  padding: 0px;
+}
+.MuiButton-root{
+  padding: 16px 15px;
+}

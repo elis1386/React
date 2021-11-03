@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Authors } from "../utils/costans";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Button';
 
 export const Addform = ({onSendMessage}) => {
    const [value, setValue] = useState('')
@@ -21,8 +23,11 @@ export const Addform = ({onSendMessage}) => {
 
     return(
         <form className="add" onSubmit={submitHandler}> 
-            <input type="text" value={value} ref={inputRef} onChange={changeHandle} />
-            <button className="btn" type="submit"> Send </button>
+        <Form.Control type="text" placeholder="Please enter text" 
+         id="standsrd-basic" label="Standard" 
+         variant="standard" value={value} 
+         inputRef={inputRef} onChange={changeHandle}/>
+        <Button  variant="primary" type="submit">Send</Button>
         </form>  
         )
     }

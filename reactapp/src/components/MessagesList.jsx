@@ -1,10 +1,10 @@
 import React from "react";
 
 export const MessagesList = ({messages}) => (
-   <div>
+   <div key={messages.id}>
        {messages.map((message => 
        <div>
-           <span>{message.author}</span> : <span>{message.text}</span>
+           <span>{message.author}</span>: <span>{message.text}</span>
         </div>
         ))}
        </div>

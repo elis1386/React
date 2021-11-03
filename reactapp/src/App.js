@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css'
-import {Message} from './components/Message'
 import {Addform} from './components/Addform'
 import { MessagesList } from './components/MessagesList';
 import { Authors } from './utils/costans';
@@ -21,13 +20,11 @@ function App() {
   
   useEffect(() => {
     if(messages.length && messages[messages.length -1].author !== Authors.bot){
-     const timeout = setTimeout(
-       () => handleSendMessage(
-      {
-        author: Authors.bot, 
-        text: "Hello, I'm a bot",
-        id: Date.now()
-      }), 1500)
+    const timeout = setTimeout( () => handleSendMessage({
+      author: Authors.bot, 
+      text: "Hello, I'm a bot",
+      id: Date.now()
+    }), 1500)
       return () => clearTimeout(timeout)
     }
   },[messages])
@@ -35,7 +32,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Message />
         <MessagesList messages={messages} />
         <Addform  onSendMessage={handleSendMessage}/>
       </header>
