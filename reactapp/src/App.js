@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import './App.css'
 import {Addform} from './components/Addform'
+import { ChatList } from './components/ChatList';
 import { MessagesList } from './components/MessagesList';
 import { Authors } from './utils/costans';
 
@@ -31,7 +32,9 @@ function App() {
 
   return (
     <div className="App">
+        
       <header className="App-header">
+        <ChatList />
         <MessagesList messages={messages} />
         <Addform  onSendMessage={handleSendMessage}/>
       </header>

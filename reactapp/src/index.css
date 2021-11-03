@@ -6,6 +6,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.chat-list{
+  display: flex;
+  flex-direction: row;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -14,10 +18,9 @@ code {
 .header {
   color: beige;
 }
-.btn{
-  background-color: rgb(180, 223, 224);
-  border-color: rgb(180, 223, 224);
-}
+/* .btn-form{
+padding: 10px;
+} */
 .add{
   margin-top: 3rem;
 }

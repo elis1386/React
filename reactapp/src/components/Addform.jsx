@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, } from "react";
 import { Authors } from "../utils/costans";
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Button';
+import InputGroup from 'react-bootstrap/InputGroup';
+import FormControl from 'react-bootstrap/FormControl';
+
 
 export const Addform = ({onSendMessage}) => {
    const [value, setValue] = useState('')
@@ -21,13 +23,22 @@ export const Addform = ({onSendMessage}) => {
     setValue('')
     }
 
+    // useEffect(() => {
+    //     inputRef.current?.focus();
+    //   }, []);
+
     return(
-        <form className="add" onSubmit={submitHandler}> 
-        <Form.Control type="text" placeholder="Please enter text" 
-         id="standsrd-basic" label="Standard" 
-         variant="standard" value={value} 
-         inputRef={inputRef} onChange={changeHandle}/>
-        <Button  variant="primary" type="submit">Send</Button>
-        </form>  
+        <form className="add" onSubmit={submitHandler}>
+        <InputGroup  className="mb-3">
+            <FormControl
+                autoFocus
+                placeholder="Please enter text"
+                value={value} 
+                inputRef={inputRef} 
+                onChange={changeHandle}
+            />
+            <Button variant="primary" type="submit">Send</Button>
+        </InputGroup>
+        </form> 
         )
     }
