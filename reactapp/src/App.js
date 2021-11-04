@@ -23,16 +23,19 @@ function App() {
 
   const handleSendMessage = useCallback((newMessage) => {
       setMessages(prevMessages => [...prevMessages, newMessage])
-  },[messages])
+  },[])
   
   useEffect(() => {
-    if(messages.length && messages[messages.length -1].author !== Authors.bot){
-    const timeout = setTimeout( () => handleSendMessage({
+    if(messages.length && 
+      messages[messages.length -1].author !== Authors.bot)
+      { const timeout = setTimeout( 
+      () => 
+      handleSendMessage({
       author: Authors.bot, 
       text: "Hello, I'm a bot",
       id: Date.now()
     }), 1500)
-      return () => clearTimeout(timeout)
+    return () => clearTimeout(timeout)
     }
   },[messages])
 
