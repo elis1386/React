@@ -4,6 +4,12 @@ import {Addform} from './components/Addform'
 import { ChatList } from './components/ChatList';
 import { MessagesList } from './components/MessagesList';
 import { Authors } from './utils/costans';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+
+
 
 
 const mesArray = [
@@ -32,12 +38,17 @@ function App() {
 
   return (
     <div className="App">
-        
-      <header className="App-header">
-        <ChatList />
-        <MessagesList messages={messages} />
-        <Addform  onSendMessage={handleSendMessage}/>
-      </header>
+      <Container >
+       <Row>
+        <Col sm={4} md={3}>
+           <ChatList />
+        </Col>
+        <Col sm={6}>
+           <MessagesList messages={messages} />
+           <Addform  onSendMessage={handleSendMessage}/>
+        </Col>
+       </Row>
+     </Container>
     </div>
   );
 }
