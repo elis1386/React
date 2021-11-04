@@ -18,8 +18,11 @@ const mesArray = [
     author: Authors.human
   }
 ]
+
+
 function App() {
   const [messages, setMessages] = useState(mesArray)
+  
 
   const handleSendMessage = useCallback((newMessage) => {
       setMessages(prevMessages => [...prevMessages, newMessage])
