@@ -24,8 +24,8 @@ export const Addform = ({onSendMessage}) => {
     }
 
     // useEffect(() => {
-    //     inputRef.current?.focus();
-    //   }, []);
+    //   inputRef.current?.focus();
+    // }, [])
 
     return(
         <form className="add" onSubmit={submitHandler}>

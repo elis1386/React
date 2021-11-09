@@ -5,7 +5,7 @@ import Badge from 'react-bootstrap/Badge'
 
 
 
-export const ChatList = () => {
+export const ChatList = (props) => {
   return (
       <ListGroup as="ol" numbered>
         <ListGroup.Item as="li" className="d-flex justify-content-start">
