@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import './App.css'
+// import './App.css'
 import {Addform} from './Addform'
 import { ChatList } from './ChatList';
 import { MessagesList } from './MessagesList';
@@ -44,7 +44,7 @@ function Chats() {
 
   return (
     <div className="App">
-      <Container >
+      <Container>
        <Row>
         <Col sm={4} md={3}>
            <ChatList />

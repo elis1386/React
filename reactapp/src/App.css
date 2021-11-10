@@ -29,7 +29,21 @@
 
 
 .App-link {
-  color: #61dafb;
+  color: #70c3da;
+}
+
+.text{
+  color: rgb(11, 194, 235);
+  text-decoration: none;
+}
+.btn{
+  margin-right: 10px;
+}
+.text:hover{
+  color: white;
+}
+.user-btn{
+  margin-right: 5px;
 }
 
 @keyframes App-logo-spin {

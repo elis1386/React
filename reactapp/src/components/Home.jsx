@@ -1,6 +1,10 @@
 import React from "react";
 
 
-export const Home = (props) => {
-    return <h2>Welcome</h2>
+export const Home = () => {
+    return (
+    <div className="container App">
+    <h2 className="text">Welcome home, sweetie.</h2>
+    </div>  
+    )    
 }
