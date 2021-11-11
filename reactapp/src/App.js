@@ -6,6 +6,7 @@ import { Home } from "./components/Home";
 import { User } from "./components/User";
 import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
+import { ChatList } from "./components/ChatList";
 
 
 const App = () => (
@@ -24,7 +25,10 @@ const App = () => (
         </ul>
     <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/chats' element={<Chats />} />
+        <Route path='chats'>
+            <Route index element={<ChatList />} />
+            <Route path=":chatId" element={<Chats />}/>
+        </Route>
         <Route path='/user'element={<User />} />
     </Routes>
     </Container>

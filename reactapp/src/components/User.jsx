@@ -1,11 +1,13 @@
 import React from "react";
 import Card from 'react-bootstrap/Card'
 import Button from "@restart/ui/esm/Button";
+import Container from "react-bootstrap/esm/Container";
 
 
 export const User = () => {
     return (
-        <Card style={{ width: '18rem' }} className="mt-5">
+    <Container className="mt-4">
+        <Card style={{ width: '18rem' }}>
         <Card.Body>
           <Card.Title>User Profile</Card.Title>
           <Card.Text>
@@ -14,8 +16,8 @@ export const User = () => {
           </Card.Text>
           <Button className="user-btn" variant="primary">Edit</Button>
           <Button variant="danger">Delete</Button>
-
         </Card.Body>
-      </Card>  
+      </Card> 
+    </Container> 
     )    
 }

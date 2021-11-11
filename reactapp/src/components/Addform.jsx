@@ -3,6 +3,7 @@ import { Authors } from "../utils/costans";
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
+import Container from "react-bootstrap/esm/Container";
 
 
 export const Addform = ({onSendMessage}) => {
@@ -28,6 +29,7 @@ export const Addform = ({onSendMessage}) => {
     // }, [])
 
     return(
+    <Container className="mt-4">
         <form className="add" onSubmit={submitHandler}>
         <InputGroup  className="mb-3">
             <FormControl
@@ -40,5 +42,6 @@ export const Addform = ({onSendMessage}) => {
             <Button variant="primary" type="submit">Send</Button>
         </InputGroup>
         </form> 
+    </Container>    
         )
     }
