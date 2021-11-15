@@ -8,9 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { useParams } from 'react-router';
-
-
-
+import {  Navigate } from 'react-router';
 
 
 const mesArray = {
@@ -57,8 +55,8 @@ function Chats() {
   },[chatId])
   
   useEffect(() => {
-    if(messages[chatId].length && 
-      messages[chatId][messages[chatId].length -1].author !== Authors.bot)
+    if(messages[chatId]?.length && 
+      messages[chatId]?.[messages[chatId]?.length -1].author !== Authors.bot)
       { const timeout = setTimeout( 
       () => 
       handleSendMessage({
@@ -70,8 +68,11 @@ function Chats() {
     }
   },[messages])
 
+  if (!messages[chatId]){
+    return <Navigate replace to='/chats' />
+  }
+
   return (
-    // <div className="App">
       <Container className="mt-4">
        <Row>
         <Col sm={4} md={3}>
@@ -83,7 +84,6 @@ function Chats() {
         </Col>
        </Row>
      </Container>
-    // </div>
   );
 }
 

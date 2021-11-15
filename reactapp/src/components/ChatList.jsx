@@ -23,8 +23,8 @@ const chatList = [
 export const ChatList = () => {
   return (
     <Container className="mt-4">
-      <ListGroup as="ol" numbered>
-        {chatList.map(chat => <NavLink style={({ isActive }) => ({ color: isActive ? 'pacific' : 'grey' })}to={`/chats/${chat.id}`}>{chat.name}</NavLink>)}
+      <ListGroup as="ol" > 
+        {chatList.map(chat => <NavLink className="mt-4" style={({ isActive }) => ({ color: isActive ? 'pacific' : 'grey' })}to={`/chats/${chat.id}`}>{chat.name}</NavLink>)}
         {/* <div className="ms-2 me-auto"><span className="fw-bold"></span></div> */}
       </ListGroup>
     </Container>

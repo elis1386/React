@@ -10,8 +10,8 @@ import { ChatList } from "./components/ChatList";
 
 
 const App = () => (
-  <BrowserRouter>
-      <Container className="mt-4">
+<BrowserRouter>
+    <Container className="mt-4">
         <ul>
             <Button variant="outline-info" size="sm" className="mr-5">
             <Link className="text" to='/'>Home</Link>
@@ -23,14 +23,15 @@ const App = () => (
             <Link className="text" to='/user'>User</Link>
             </Button>
         </ul>
-    <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='chats'>
-            <Route index element={<ChatList />} />
-            <Route path=":chatId" element={<Chats />}/>
-        </Route>
-        <Route path='/user'element={<User />} />
-    </Routes>
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='chats'>
+                <Route index element={<ChatList />} />
+                <Route path=":chatId" element={<Chats />}/>
+            </Route>
+            <Route path='/user'element={<User />} />
+            <Route path='*' element={<h2>Sorry!We'r haven't this page</h2>}/>
+        </Routes>
     </Container>
 </BrowserRouter>
 )
