@@ -11,44 +11,13 @@ import { useParams } from 'react-router';
 import {  Navigate } from 'react-router';
 
 
-const mesArray = {
-  chat1:[
-  {
-    text: 'Good morning',
-    author: Authors.human
-  },
-  {
-    text: 'Could u pls to help me',
-    author: Authors.human
-  },{
-    text: 'Sure',
-    author: Authors.bot
-  },
- ],
- chat2:[
-  {
-    text: 'Good morning',
-    author: Authors.human
-  }
- ],
- chat3:[
-  {
-    text: 'Good morning',
-    author: Authors.human
-  },
-  {
-    text: 'Hey, how can I help u',
-    author: Authors.bot
-  },
- ],
-
-}
 
 
-function Chats() {
+
+
+function Chats(chatList, messages,setMessages) {
   const {chatId} = useParams()
 
-  const [messages, setMessages] = useState(mesArray)
 
   const handleSendMessage = useCallback((newMessage) => {
       setMessages((prevMessages) => ({...prevMessages, [chatId]: [...prevMessages[chatId], newMessage] }))
@@ -76,7 +45,7 @@ function Chats() {
       <Container className="mt-4">
        <Row>
         <Col sm={4} md={3}>
-           <ChatList />
+           <ChatList chatList={chatList} />
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
