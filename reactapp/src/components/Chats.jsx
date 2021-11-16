@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 // import './App.css'
 import {Addform} from './Addform'
 import { ChatList } from './ChatList';
@@ -7,16 +7,15 @@ import { Authors } from '../utils/costans';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useParams } from 'react-router';
-import {  Navigate } from 'react-router';
+import {  Navigate, useParams  } from 'react-router';
+import Button from '@restart/ui/esm/Button';
 
 
 
 
-
-
-function Chats(chatList, messages,setMessages) {
+function Chats({chatList, messages, setMessages}) {
   const {chatId} = useParams()
+  const parentRef = useRef();
 
 
   const handleSendMessage = useCallback((newMessage) => {
@@ -42,7 +41,7 @@ function Chats(chatList, messages,setMessages) {
   }
 
   return (
-      <Container className="mt-4">
+      <Container className="mt-4" ref={parentRef}>
        <Row>
         <Col sm={4} md={3}>
            <ChatList chatList={chatList} />
@@ -50,8 +49,10 @@ function Chats(chatList, messages,setMessages) {
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
+           <Button className="mt-4 delete-chats" size="sm" onClick={() => {}}>Delete this chat</Button>
         </Col>
        </Row>
+
      </Container>
   );
 }

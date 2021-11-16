@@ -1,6 +1,7 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useCallback, useState } from "react";
 import './App.css'
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom"
+import { Provider } from "react-redux";
 import Chats from "./components/Chats";
 import { Home } from "./components/Home";
 import { User } from "./components/User";
@@ -9,6 +10,7 @@ import Container from "react-bootstrap/esm/Container";
 import { ChatList } from "./components/ChatList";
 import { ThemeContex } from "./utils/themeContext";
 import { Authors } from './utils/costans';
+import { store } from "./Store";
 
 
 
@@ -73,6 +75,7 @@ export const App = () => {
 
 return(
 <ThemeContex.Provider value={{color, toggleColor}}>
+    <Provider store={store}>
     <BrowserRouter>
         <Container className="mt-4">
             <ul>
@@ -89,21 +92,15 @@ return(
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='chats'>
-                    <Route index element={<ChatList chatList={chatList} />} />
-                    <Route path=":chatId" element={
-                    <Chats 
-                    chatList={chatList} 
-                    messages={messages} 
-                    setMessages={setMessages}
-                    />
-                    }
-                    />
+                  <Route index element={<ChatList chatList={chatList} />} />
+                  <Route path=":chatId"  element={ <Chats chatList={chatList} messages={messages} setMessages={setMessages} /> } />
                 </Route>
                 <Route path='/user'element={<User />} />
                 <Route path='*' element={<h2>Sorry!We'r haven't this page</h2>}/>
             </Routes>
         </Container>
     </BrowserRouter>
+    </Provider>
 </ThemeContex.Provider>
 )
 }

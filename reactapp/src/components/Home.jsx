@@ -10,7 +10,7 @@ export const Home = () => {
     return (
     <Container className="mt-4">
     <h2 className="text">Welcome home, sweetie.</h2>
-    <Button style={{backgroundColor: color}} onClick={toggleColor} className="mt-4">Change color</Button> 
+    <Button style={{backgroundColor: color, borderColor: color}} onClick={toggleColor} className="mt-4">Change color</Button> 
     </Container>
     )    
 }
