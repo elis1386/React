@@ -10,6 +10,16 @@ body {
   display: flex;
   flex-direction: row;
 }
+.delete-chats{
+  width: 30%;
+  color: white;
+  background-color: rgb(238, 68, 68);
+  border-color: rgb(238, 68, 68);
+
+}
+.btn-color{
+  border-color: lightblue;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

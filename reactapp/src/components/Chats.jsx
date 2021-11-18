@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 // import './App.css'
 import {Addform} from './Addform'
 import { ChatList } from './ChatList';
@@ -7,52 +7,22 @@ import { Authors } from '../utils/costans';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { useParams } from 'react-router';
-import {  Navigate } from 'react-router';
+import {  Navigate, useParams  } from 'react-router';
+import Button from '@restart/ui/esm/Button';
 
 
-const mesArray = {
-  chat1:[
-  {
-    text: 'Good morning',
-    author: Authors.human
-  },
-  {
-    text: 'Could u pls to help me',
-    author: Authors.human
-  },{
-    text: 'Sure',
-    author: Authors.bot
-  },
- ],
- chat2:[
-  {
-    text: 'Good morning',
-    author: Authors.human
-  }
- ],
- chat3:[
-  {
-    text: 'Good morning',
-    author: Authors.human
-  },
-  {
-    text: 'Hey, how can I help u',
-    author: Authors.bot
-  },
- ],
-
-}
 
 
-function Chats() {
+function Chats({chatList, messages, setMessages, onDeleteChat}) {
   const {chatId} = useParams()
+  const parentRef = useRef();
 
-  const [messages, setMessages] = useState(mesArray)
 
   const handleSendMessage = useCallback((newMessage) => {
       setMessages((prevMessages) => ({...prevMessages, [chatId]: [...prevMessages[chatId], newMessage] }))
   },[chatId])
+
+
   
   useEffect(() => {
     if(messages[chatId]?.length && 
@@ -73,16 +43,18 @@ function Chats() {
   }
 
   return (
-      <Container className="mt-4">
+      <Container className="mt-4" ref={parentRef}>
        <Row>
         <Col sm={4} md={3}>
-           <ChatList />
+           <ChatList chatList={chatList}  />
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
+           <Button className="mt-4 delete-chats" size="sm" onDeleteChat={onDeleteChat}>Delete this chat</Button>
         </Col>
        </Row>
+
      </Container>
   );
 }
