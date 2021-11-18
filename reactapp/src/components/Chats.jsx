@@ -13,7 +13,7 @@ import Button from '@restart/ui/esm/Button';
 
 
 
-function Chats({chatList, messages, setMessages}) {
+function Chats({chatList, messages, setMessages, onDeleteChat}) {
   const {chatId} = useParams()
   const parentRef = useRef();
 
@@ -21,6 +21,8 @@ function Chats({chatList, messages, setMessages}) {
   const handleSendMessage = useCallback((newMessage) => {
       setMessages((prevMessages) => ({...prevMessages, [chatId]: [...prevMessages[chatId], newMessage] }))
   },[chatId])
+
+
   
   useEffect(() => {
     if(messages[chatId]?.length && 
@@ -44,12 +46,12 @@ function Chats({chatList, messages, setMessages}) {
       <Container className="mt-4" ref={parentRef}>
        <Row>
         <Col sm={4} md={3}>
-           <ChatList chatList={chatList} />
+           <ChatList chatList={chatList}  />
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
-           <Button className="mt-4 delete-chats" size="sm" onClick={() => {}}>Delete this chat</Button>
+           <Button className="mt-4 delete-chats" size="sm" onDeleteChat={onDeleteChat}>Delete this chat</Button>
         </Col>
        </Row>
 
