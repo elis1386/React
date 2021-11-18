@@ -29,9 +29,10 @@ code {
   color: beige;
 }
 
-.input-form{
-  padding: 0px;
-}
+
 .MuiButton-root{
   padding: 16px 15px;
+}
+.form-control{
+  width: 30%;
 }

@@ -18,30 +18,39 @@ const mesArray = {
     chat1:[
     {
       text: 'Good morning',
-      author: Authors.human
+      author: Authors.human,
+      id: 'mes1'
     },
     {
       text: 'Could u pls to help me',
       author: Authors.human
     },{
       text: 'Sure',
-      author: Authors.bot
+      author: Authors.bot,
+      id: 'mes2'
+
     },
    ],
    chat2:[
     {
       text: 'Good morning',
-      author: Authors.human
+      author: Authors.human,
+      id: 'mes3'
+
     }
    ],
    chat3:[
     {
       text: 'Good morning',
-      author: Authors.human
+      author: Authors.human,
+      id: 'mes4'
+
     },
     {
       text: 'Hey, how can I help u',
-      author: Authors.bot
+      author: Authors.bot,
+      id: 'mes5'
+
     },
    ],
   
@@ -63,8 +72,31 @@ const mesArray = {
 
 
 export const App = () => {
-    const [chatList, setChatlist] = useState(chatsArray)
+    const [chatList, setChatList] = useState(chatsArray)
     const [messages, setMessages] = useState(mesArray)
+
+    const handleAddChat = useCallback((name) => {
+      const newId = `chat${Date.now()}`;
+  
+      setChatList((prevChatList) => [...prevChatList, { name, id: newId }]);
+      setMessages((prevMessages) => ({
+        ...prevMessages,
+        [newId]: [],
+      }));
+    }, []);
+
+    const handleDeleteChat = useCallback((idToDelete) => {
+      setChatList((prevChatList) =>
+        prevChatList.filter(({ id }) => id !== idToDelete)
+      );
+      setMessages((prevMessages) => {
+        const newMessages = { ...prevMessages };
+        delete newMessages[idToDelete];
+  
+        return newMessages;
+      });
+    }, []);
+  
     
     const[color, setColor]= useState('lightblue')
     
@@ -92,8 +124,17 @@ return(
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='chats'>
-                  <Route index element={<ChatList chatList={chatList} />} />
-                  <Route path=":chatId"  element={ <Chats chatList={chatList} messages={messages} setMessages={setMessages} /> } />
+                  <Route index element={<ChatList chatList={chatList} onAddChat={handleAddChat}/>} />
+                  <Route path=":chatId"  element={
+                     <Chats 
+                     chatList={chatList} 
+                     messages={messages} 
+                     setMessages={setMessages} 
+                     onAddChat={handleAddChat} 
+                     onDeleteChat={handleDeleteChat}
+                     /> 
+                     } 
+                     />
                 </Route>
                 <Route path='/user'element={<User />} />
                 <Route path='*' element={<h2>Sorry!We'r haven't this page</h2>}/>

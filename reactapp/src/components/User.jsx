@@ -1,7 +1,7 @@
 import React from "react"
 import{useSelector, useDispatch} from 'react-redux'
 import Card from 'react-bootstrap/Card'
-import Button from "@restart/ui/esm/Button"
+import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/esm/Container"
 import { toggleCheckbox } from "../Store/Redusers/actions"
 

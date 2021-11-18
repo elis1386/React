@@ -8,12 +8,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {  Navigate, useParams  } from 'react-router';
-import Button from '@restart/ui/esm/Button';
+import Button from "react-bootstrap/Button";
 
 
 
 
-function Chats({chatList, messages, setMessages, onDeleteChat}) {
+function Chats({chatList, messages, setMessages, handleDeleteChat}) {
   const {chatId} = useParams()
   const parentRef = useRef();
 
@@ -45,13 +45,13 @@ function Chats({chatList, messages, setMessages, onDeleteChat}) {
   return (
       <Container className="mt-4" ref={parentRef}>
        <Row>
-        <Col sm={4} md={3}>
+        <Col sm={4} md={4}>
            <ChatList chatList={chatList}  />
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
-           <Button className="mt-4 delete-chats" size="sm" onDeleteChat={onDeleteChat}>Delete this chat</Button>
+           <Button className="mt-4 delete-chats" variant="danger" size="sm" onDeleteChat={handleDeleteChat}>Delete this chat</Button>
         </Col>
        </Row>
 

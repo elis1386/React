@@ -45,6 +45,9 @@
 .user-btn{
   margin-right: 5px;
 }
+.input-form{
+  padding: 0px;
+}
 
 @keyframes App-logo-spin {
   from {
