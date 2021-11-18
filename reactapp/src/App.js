@@ -1,62 +1,44 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from "react";
 import './App.css'
-import {Addform} from './components/Addform'
-import { ChatList } from './components/ChatList';
-import { MessagesList } from './components/MessagesList';
-import { Authors } from './utils/costans';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { BrowserRouter, Route, Link, Routes } from "react-router-dom"
+import Chats from "./components/Chats";
+import { Home } from "./components/Home";
+import { User } from "./components/User";
+import Button from 'react-bootstrap/Button';
+import Container from "react-bootstrap/esm/Container";
+import { ChatList } from "./components/ChatList";
+
+
+const App = () => (
+<BrowserRouter>
+    <Container className="mt-4">
+        <ul>
+            <Button variant="outline-info" size="sm" className="mr-5">
+            <Link className="text" to='/'>Home</Link>
+            </Button>
+            <Button variant="outline-info"size="sm">
+            <Link className="text" to='/chats'>Chats</Link>
+            </Button>
+            <Button variant="outline-info"size="sm">
+            <Link className="text" to='/user'>User</Link>
+            </Button>
+        </ul>
+        <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='chats'>
+                <Route index element={<ChatList />} />
+                <Route path=":chatId" element={<Chats />}/>
+            </Route>
+            <Route path='/user'element={<User />} />
+            <Route path='*' element={<h2>Sorry!We'r haven't this page</h2>}/>
+        </Routes>
+    </Container>
+</BrowserRouter>
+)
+
+
+export default App
+ 
 
 
 
-
-
-const mesArray = [
-  {
-    text: 'Good morning',
-    author: Authors.human
-  }
-]
-
-
-function App() {
-  const [messages, setMessages] = useState(mesArray)
-  
-
-  const handleSendMessage = useCallback((newMessage) => {
-      setMessages(prevMessages => [...prevMessages, newMessage])
-  },[])
-  
-  useEffect(() => {
-    if(messages.length && 
-      messages[messages.length -1].author !== Authors.bot)
-      { const timeout = setTimeout( 
-      () => 
-      handleSendMessage({
-      author: Authors.bot, 
-      text: "Hello, I'm a bot",
-      id: Date.now()
-    }), 1500)
-    return () => clearTimeout(timeout)
-    }
-  },[messages])
-
-  return (
-    <div className="App">
-      <Container >
-       <Row>
-        <Col sm={4} md={3}>
-           <ChatList />
-        </Col>
-        <Col sm={6}>
-           <MessagesList messages={messages} />
-           <Addform  onSendMessage={handleSendMessage}/>
-        </Col>
-       </Row>
-     </Container>
-    </div>
-  );
-}
-
-export default App;
