@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import './App.css'
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom"
-import { Provider } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import Chats from "./components/Chats";
 import { Home } from "./components/Home";
 import { User } from "./components/User";
@@ -9,86 +9,89 @@ import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
 import { ChatList } from "./components/ChatList";
 import { ThemeContex } from "./utils/themeContext";
-import { Authors } from './utils/costans';
-import { store } from "./Store";
+import { addChat,deleteChat } from "./Store/chats/actions";
 
 
 
 const mesArray = {
-    chat1:[
-    {
-      text: 'Good morning',
-      author: Authors.human,
-      id: 'mes1'
-    },
-    {
-      text: 'Could u pls to help me',
-      author: Authors.human
-    },{
-      text: 'Sure',
-      author: Authors.bot,
-      id: 'mes2'
+//     chat1:[
+//     {
+//       text: 'Good morning',
+//       author: Authors.human,
+//       id: 'mes1'
+//     },
+//     {
+//       text: 'Could u pls to help me',
+//       author: Authors.human
+//     },{
+//       text: 'Sure',
+//       author: Authors.bot,
+//       id: 'mes2'
 
-    },
-   ],
-   chat2:[
-    {
-      text: 'Good morning',
-      author: Authors.human,
-      id: 'mes3'
+//     },
+//    ],
+//    chat2:[
+//     {
+//       text: 'Good morning',
+//       author: Authors.human,
+//       id: 'mes3'
 
-    }
-   ],
-   chat3:[
-    {
-      text: 'Good morning',
-      author: Authors.human,
-      id: 'mes4'
+//     }
+//    ],
+//    chat3:[
+//     {
+//       text: 'Good morning',
+//       author: Authors.human,
+//       id: 'mes4'
 
-    },
-    {
-      text: 'Hey, how can I help u',
-      author: Authors.bot,
-      id: 'mes5'
+//     },
+//     {
+//       text: 'Hey, how can I help u',
+//       author: Authors.bot,
+//       id: 'mes5'
 
-    },
-   ],
+//     },
+//    ],
   
   }
-  const chatsArray = [
-    {
-      name: 'Chat 1',
-      id: 'chat1'
-    },
-    {
-      name: 'Chat 2',
-      id: 'chat2'
-    },
-    {
-      name: 'Chat 3',
-      id: 'chat3'
-    },
-  ]
+  // const chatsArray = [
+  //   {
+  //     name: 'Chat 1',
+  //     id: 'chat1'
+  //   },
+  //   {
+  //     name: 'Chat 2',
+  //     id: 'chat2'
+  //   },
+  //   {
+  //     name: 'Chat 3',
+  //     id: 'chat3'
+  //   },
+  // ]
 
 
 export const App = () => {
-    const [chatList, setChatList] = useState(chatsArray)
+    // const [chatList, setChatList] = useState(chatsArray)
+    const chatList = useSelector(state => state.chats)
+    const dispatch = useDispatch()
     const [messages, setMessages] = useState(mesArray)
 
     const handleAddChat = useCallback((name) => {
       const newId = `chat${Date.now()}`;
   
-      setChatList(prevChatList => [...prevChatList, { name, id: newId }]);
+      // setChatList(prevChatList => [...prevChatList, { name, id: newId }]);
+      dispatch(addChat({ name, id: newId }))
       setMessages(prevMessages => ({
         ...prevMessages,
         [newId]: [],
       }));
-    }, []);
+    }, [dispatch]);
 
     const handleDeleteChat = useCallback((idToDelete) => {
-      setChatList(prevChatList =>
-        prevChatList.filter(({ id }) => id !== idToDelete)
-      );
+      // setChatList(prevChatList =>
+      //   prevChatList.filter(({ id }) => id !== idToDelete)
+      // );
+      dispatch(deleteChat(idToDelete))
       setMessages(prevMessages => {
         const newMessages = { ...prevMessages };
         delete newMessages[idToDelete];
@@ -107,7 +110,6 @@ export const App = () => {
 
 return(
 <ThemeContex.Provider value={{color, toggleColor}}>
-    <Provider store={store}>
     <BrowserRouter>
         <Container className="mt-4">
             <ul>
@@ -141,7 +143,6 @@ return(
             </Routes>
         </Container>
     </BrowserRouter>
-    </Provider>
 </ThemeContex.Provider>
 )
 }

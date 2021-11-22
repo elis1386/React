@@ -1,9 +1,9 @@
 import React from "react"
-import{useSelector, useDispatch} from 'react-redux'
+import{useSelector, useDispatch,} from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/esm/Container"
-import { toggleCheckbox } from "../Store/Redusers/actions"
+import { toggleCheckbox } from "../Store/user/actions"
 
 export const User = () => {
     const checkboxValue = useSelector(state => state.checkbox)
@@ -31,3 +31,11 @@ export const User = () => {
     </Container> 
     )    
 }
+
+// const mapStateToProps = (state) => ({
+//   name: state.user.name,
+//   checkboxValue: state.user.checkboxValue
+// })
+// const mapDispatchToProps = {}
+
+// export const ConnectedUser = connect(mapStateToProps)(User)
