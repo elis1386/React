@@ -11,7 +11,7 @@ import Col from 'react-bootstrap/Col';
 
 
 
-export const ChatList = ({chatList, handleAddChat}) => {
+export const ChatList = ({chatList, onAddChat, onDeleteChat}) => {
   const [value, setValue] = useState('')
   
   const handleChange = (event) => {
@@ -19,6 +19,7 @@ export const ChatList = ({chatList, handleAddChat}) => {
   }
   const handleSubmit = (event) => {
     event.preventDefault()
+    onAddChat(value)
 
     setValue('')
   }
@@ -34,7 +35,7 @@ export const ChatList = ({chatList, handleAddChat}) => {
     <Col sm={4} md={6}>
      <Form  className="mt-4" onSubmit={handleSubmit}>
         <Form.Control as="textarea" rows={1} value={value} onChange={handleChange} />
-        <Button className="mt-4" variant="success" size="sm" type="submit">Add new chat</Button>
+        <Button className="mt-4" variant="success" size="sm" type="submit" onAddChat={onAddChat}>Add new chat</Button>
       </Form > 
     </Col>
     </Container>

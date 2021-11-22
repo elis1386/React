@@ -13,7 +13,7 @@ import Button from "react-bootstrap/Button";
 
 
 
-function Chats({chatList, messages, setMessages, handleDeleteChat}) {
+function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
   const {chatId} = useParams()
   const parentRef = useRef();
 
@@ -46,12 +46,12 @@ function Chats({chatList, messages, setMessages, handleDeleteChat}) {
       <Container className="mt-4" ref={parentRef}>
        <Row>
         <Col sm={4} md={4}>
-           <ChatList chatList={chatList}  />
+           <ChatList chatList={chatList} onDeleteChat={onDeleteChat} onAddChat={onAddChat}/>
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
-           <Button className="mt-4 delete-chats" variant="danger" size="sm" onDeleteChat={handleDeleteChat}>Delete this chat</Button>
+           <Button className="mt-4 delete-chats" variant="danger" size="sm" onClick={() => onDeleteChat(chatId)}>Delete this chat</Button>
         </Col>
        </Row>
 

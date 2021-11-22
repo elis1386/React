@@ -78,18 +78,18 @@ export const App = () => {
     const handleAddChat = useCallback((name) => {
       const newId = `chat${Date.now()}`;
   
-      setChatList((prevChatList) => [...prevChatList, { name, id: newId }]);
-      setMessages((prevMessages) => ({
+      setChatList(prevChatList => [...prevChatList, { name, id: newId }]);
+      setMessages(prevMessages => ({
         ...prevMessages,
         [newId]: [],
       }));
     }, []);
 
     const handleDeleteChat = useCallback((idToDelete) => {
-      setChatList((prevChatList) =>
+      setChatList(prevChatList =>
         prevChatList.filter(({ id }) => id !== idToDelete)
       );
-      setMessages((prevMessages) => {
+      setMessages(prevMessages => {
         const newMessages = { ...prevMessages };
         delete newMessages[idToDelete];
   
@@ -124,7 +124,7 @@ return(
             <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='chats'>
-                  <Route index element={<ChatList chatList={chatList} onAddChat={handleAddChat}/>} />
+                  <Route index element={<ChatList chatList={chatList} onAddChat={handleAddChat} onDeleteChat={handleDeleteChat}/>} />
                   <Route path=":chatId"  element={
                      <Chats 
                      chatList={chatList} 
