@@ -7,11 +7,7 @@ import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
 
 
-
-
-
-
-export const ChatList = ({chatList, onAddChat, onDeleteChat}) => {
+export const ChatList = ({chatList, onAddChat,}) => {
   const [value, setValue] = useState('')
   
   const handleChange = (event) => {
