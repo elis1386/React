@@ -46,7 +46,7 @@ function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
       <Container className="mt-4" ref={parentRef}>
        <Row>
         <Col sm={4} md={4}>
-           <ChatList chatList={chatList} onDeleteChat={onDeleteChat} onAddChat={onAddChat}/>
+        <ChatList chatList={chatList} onDeleteChat={onDeleteChat} onAddChat={onAddChat}/>
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
@@ -54,7 +54,6 @@ function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
            <Button className="mt-4 delete-chats" variant="danger" size="sm" onClick={() => onDeleteChat(chatId)}>Delete this chat</Button>
         </Col>
        </Row>
-
      </Container>
   );
 }

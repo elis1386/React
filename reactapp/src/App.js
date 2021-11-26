@@ -8,70 +8,14 @@ import { User } from "./components/User";
 import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
 import { ChatList } from "./components/ChatList";
-import { ThemeContex } from "./utils/themeContext";
 import { addChat,deleteChat } from "./Store/chats/actions";
 
 
 
-const mesArray = {
-//     chat1:[
-//     {
-//       text: 'Good morning',
-//       author: Authors.human,
-//       id: 'mes1'
-//     },
-//     {
-//       text: 'Could u pls to help me',
-//       author: Authors.human
-//     },{
-//       text: 'Sure',
-//       author: Authors.bot,
-//       id: 'mes2'
-
-//     },
-//    ],
-//    chat2:[
-//     {
-//       text: 'Good morning',
-//       author: Authors.human,
-//       id: 'mes3'
-
-//     }
-//    ],
-//    chat3:[
-//     {
-//       text: 'Good morning',
-//       author: Authors.human,
-//       id: 'mes4'
-
-//     },
-//     {
-//       text: 'Hey, how can I help u',
-//       author: Authors.bot,
-//       id: 'mes5'
-
-//     },
-//    ],
-  
-  }
-  // const chatsArray = [
-  //   {
-  //     name: 'Chat 1',
-  //     id: 'chat1'
-  //   },
-  //   {
-  //     name: 'Chat 2',
-  //     id: 'chat2'
-  //   },
-  //   {
-  //     name: 'Chat 3',
-  //     id: 'chat3'
-  //   },
-  // ]
+const mesArray = {}
 
 
 export const App = () => {
-    // const [chatList, setChatList] = useState(chatsArray)
     const chatList = useSelector(state => state.chats)
     const dispatch = useDispatch()
     const [messages, setMessages] = useState(mesArray)
@@ -79,7 +23,6 @@ export const App = () => {
     const handleAddChat = useCallback((name) => {
       const newId = `chat${Date.now()}`;
   
-      // setChatList(prevChatList => [...prevChatList, { name, id: newId }]);
       dispatch(addChat({ name, id: newId }))
       setMessages(prevMessages => ({
         ...prevMessages,
@@ -88,9 +31,6 @@ export const App = () => {
     }, [dispatch]);
 
     const handleDeleteChat = useCallback((idToDelete) => {
-      // setChatList(prevChatList =>
-      //   prevChatList.filter(({ id }) => id !== idToDelete)
-      // );
       dispatch(deleteChat(idToDelete))
       setMessages(prevMessages => {
         const newMessages = { ...prevMessages };
@@ -101,15 +41,8 @@ export const App = () => {
     }, []);
   
     
-    const[color, setColor]= useState('lightblue')
-    
-    const toggleColor = useCallback(() => {
-        setColor(prevColor => prevColor === 'lightblue' ? 'lightgreen' : 'orange')
-    },[])
-
 
 return(
-<ThemeContex.Provider value={{color, toggleColor}}>
     <BrowserRouter>
         <Container className="mt-4">
             <ul>
@@ -143,7 +76,6 @@ return(
             </Routes>
         </Container>
     </BrowserRouter>
-</ThemeContex.Provider>
 )
 }
 
