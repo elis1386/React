@@ -1,6 +1,5 @@
 import {React, useState} from "react";
-import {  NavLink } from "react-router-dom"
-import ListGroup from 'react-bootstrap/ListGroup'
+import { ChatItem } from "./ChatItem";
 import Container from "react-bootstrap/esm/Container";
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
@@ -21,17 +20,11 @@ export const ChatList = ({chatList, onAddChat,}) => {
   }
   return (
     <Container  className="mt-4">
-        {chatList.map((chat) => (
-        <ListGroup className="items" as="ol" > 
-        <NavLink className="mt-4" 
-        style={({ isActive }) => ({ color: isActive ? 'pacific' : 'grey' })}
-        to={`/chats/${chat.id}`}>{chat.name}</NavLink>
-      </ListGroup>
-      ))}
+        {chatList.map((chat) => (<ChatItem chat={chat}/>))}
     <Col sm={4} md={6}>
      <Form  className="mt-4" onSubmit={handleSubmit}>
         <Form.Control as="textarea" rows={1} value={value} onChange={handleChange} />
-        <Button className="mt-4" variant="success" size="sm" type="submit" onAddChat={onAddChat}>Add new chat</Button>
+        <Button className="mt-4 btn" variant="success" size="sm" type="submit" onAddChat={onAddChat}>Add new chat</Button>
       </Form > 
     </Col>
     </Container>

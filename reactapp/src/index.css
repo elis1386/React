@@ -36,3 +36,6 @@ code {
 .form-control{
   width: 30%;
 }
+.btn-delete{
+  margin-left: 10px;
+}

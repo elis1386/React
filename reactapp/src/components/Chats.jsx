@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
-// import './App.css'
+import React, { useCallback, useEffect } from 'react';
 import {Addform} from './Addform'
 import { ChatList } from './ChatList';
 import { MessagesList } from './MessagesList';
@@ -8,14 +7,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {  Navigate, useParams  } from 'react-router';
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
 
 
 
 
 function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
   const {chatId} = useParams()
-  const parentRef = useRef();
 
 
   const handleSendMessage = useCallback((newMessage) => {
@@ -43,7 +41,7 @@ function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
   }
 
   return (
-      <Container className="mt-4" ref={parentRef}>
+      <Container className="mt-4">
        <Row>
         <Col sm={4} md={4}>
         <ChatList chatList={chatList} onDeleteChat={onDeleteChat} onAddChat={onAddChat}/>
@@ -51,7 +49,7 @@ function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
-           <Button className="mt-4 delete-chats" variant="danger" size="sm" onClick={() => onDeleteChat(chatId)}>Delete this chat</Button>
+           {/* <Button className="mt-4 delete-chats" variant="danger" size="sm" onClick={() => onDeleteChat(chatId)}>Delete this chat</Button> */}
         </Col>
        </Row>
      </Container>
