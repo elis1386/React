@@ -7,17 +7,21 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {  Navigate, useParams  } from 'react-router';
-// import Button from "react-bootstrap/Button";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectMessages } from '../store/messages/selectors';
+import { addMessage } from '../store/messages/actions';
 
 
 
 
-function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
+function Chats() {
   const {chatId} = useParams()
+  const messages = useSelector(selectMessages)
+  const dispatch = useDispatch()
 
 
   const handleSendMessage = useCallback((newMessage) => {
-      setMessages((prevMessages) => ({...prevMessages, [chatId]: [...prevMessages[chatId], newMessage] }))
+    dispatch(addMessage(chatId, newMessage))  
   },[chatId])
 
 
@@ -41,18 +45,17 @@ function Chats({chatList, messages, setMessages, onDeleteChat, onAddChat}) {
   }
 
   return (
-      <Container className="mt-4">
-       <Row>
+    <Container className="mt-4">
+      <Row>
         <Col sm={4} md={4}>
-        <ChatList chatList={chatList} onDeleteChat={onDeleteChat} onAddChat={onAddChat}/>
+        <ChatList />
         </Col>
         <Col sm={6}>
            <MessagesList messages={messages[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
-           {/* <Button className="mt-4 delete-chats" variant="danger" size="sm" onClick={() => onDeleteChat(chatId)}>Delete this chat</Button> */}
         </Col>
-       </Row>
-     </Container>
+      </Row>
+    </Container>
   );
 }
 

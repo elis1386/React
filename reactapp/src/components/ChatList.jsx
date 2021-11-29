@@ -4,9 +4,15 @@ import Container from "react-bootstrap/esm/Container";
 import Form from 'react-bootstrap/Form'
 import Button from "react-bootstrap/Button";
 import Col from 'react-bootstrap/Col';
+import { selectChats } from '../store/chats/selectors'
+import { useDispatch, useSelector } from "react-redux";
+import { addChat } from "../store/chats/actions";
 
 
-export const ChatList = ({chatList, onAddChat,}) => {
+
+export const ChatList = () => {
+  const chatList = useSelector(selectChats);
+  const dispatch = useDispatch();
   const [value, setValue] = useState('')
   
   const handleChange = (event) => {
@@ -14,7 +20,9 @@ export const ChatList = ({chatList, onAddChat,}) => {
   }
   const handleSubmit = (event) => {
     event.preventDefault()
-    onAddChat(value)
+
+  const newId = `chat${Date.now()}`;
+    dispatch(addChat({ name: value, id: newId }));
 
     setValue('')
   }
@@ -24,7 +32,7 @@ export const ChatList = ({chatList, onAddChat,}) => {
     <Col sm={4} md={6}>
      <Form  className="mt-4" onSubmit={handleSubmit}>
         <Form.Control as="textarea" rows={1} value={value} onChange={handleChange} />
-        <Button className="mt-4 btn" variant="success" size="sm" type="submit" onAddChat={onAddChat}>Add new chat</Button>
+        <Button className="mt-4" variant="success" size="sm" type="submit">Add new chat</Button>
       </Form > 
     </Col>
     </Container>

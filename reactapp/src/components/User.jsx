@@ -3,7 +3,7 @@ import{useSelector, useDispatch,} from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/esm/Container"
-import { toggleCheckbox } from "../Store/user/actions"
+import { toggleCheckbox } from "../store/user/actions"
 
 export const User = () => {
     const checkboxValue = useSelector(state => state.checkbox)

@@ -1,6 +1,6 @@
 import {  NavLink } from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { deleteChat } from '../Store/chats/actions';
+import { deleteChat } from '../store/chats/actions';
 import Button from "react-bootstrap/Button";
 import ListGroup from 'react-bootstrap/ListGroup'
 import Container from "react-bootstrap/esm/Container";
@@ -26,7 +26,7 @@ return(
             to={`/chats/${chat.id}`}>{chat.name}
         </NavLink>
         </ListGroup>
-        <Button className="mt-4 btn-delete" variant="danger" size="sm" onClick={handleDeleteClick}>Delete this chat</Button>
+        <Button className="mt-4 btn-delete" variant="outline-danger"size="sm" onClick={handleDeleteClick}>delete</Button>
     </Container>
 )
 }
