@@ -29,9 +29,16 @@ code {
   color: beige;
 }
 
-.input-form{
-  padding: 0px;
-}
+
 .MuiButton-root{
   padding: 16px 15px;
 }
+.form-control{
+  width: 30%;
+}
+.btn-delete{
+  margin-left: 10px;
+  border-color: #f9fafb;
+  
+}
+
