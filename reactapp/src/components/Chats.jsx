@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import {  Navigate, useParams  } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMessages } from '../store/messages/selectors';
-import { addMessage } from '../store/messages/actions';
+import {  addMessageWithReply } from '../store/messages/actions';
 
 
 
@@ -21,24 +21,8 @@ function Chats() {
 
 
   const handleSendMessage = useCallback((newMessage) => {
-    dispatch(addMessage(chatId, newMessage))  
+    dispatch(addMessageWithReply(chatId, newMessage))  
   },[chatId])
-
-
-  
-  useEffect(() => {
-    if(messages[chatId]?.length && 
-      messages[chatId]?.[messages[chatId]?.length -1].author !== Authors.bot)
-      { const timeout = setTimeout( 
-      () => 
-      handleSendMessage({
-      author: Authors.bot, 
-      text: "Hello, I'm a bot",
-      id: Date.now()
-    }), 1500)
-    return () => clearTimeout(timeout)
-    }
-  },[messages])
 
   if (!messages[chatId]){
     return <Navigate replace to='/chats' />
