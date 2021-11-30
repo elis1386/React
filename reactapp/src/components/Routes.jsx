@@ -7,6 +7,7 @@ import { User } from "../components/User";
 import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
 import { ChatList } from "../components/ChatList";
+import { Articles } from "./Articles";
 
 
 export const Router = () => (
@@ -22,9 +23,13 @@ export const Router = () => (
         <Button variant="outline-info"size="sm">
           <Link className="text" to='/user'>User</Link>
         </Button>
+        <Button variant="outline-info"size="sm">
+          <Link className="text" to='/articles'>Articles</Link>
+        </Button>
       </ul>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='articles' element={<Articles />} />
         <Route path='chats'>
           <Route index element={<ChatList />} />
           <Route path=":chatId"  element={ <Chats /> } />
