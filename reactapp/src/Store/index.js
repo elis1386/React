@@ -5,6 +5,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import { userReducer } from './user/reducer'
 import { chatsReducer } from './chats/reducer'
 import { messagesReducer } from './messages/reducer'
+import { articlesReducer } from "./articles/reducer";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
@@ -12,6 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const persistConfig = {
     key: 'root',
     storage,
+    blacklist: ["profile", "articles"],
   }
   
 // оборачиваем редьюсеры в persist
@@ -20,6 +22,7 @@ const persistedReducer = persistReducer(persistConfig,
     user: userReducer,
     chats: chatsReducer,
     messages: messagesReducer,
+    articles: articlesReducer,
 })
 );
   
