@@ -8,9 +8,27 @@ import Button from 'react-bootstrap/Button';
 import Container from "react-bootstrap/esm/Container";
 import { ChatList } from "../components/ChatList";
 import { Articles } from "./Articles";
+import { PublicRoute } from "./PublicRoute";
+import { PrivateRoute } from "./PrivateRoute";
+import { SignUp } from "./SignUp";
+import { useEffect } from "react";
+import { auth } from "../services/firebase";
+import { useDispatch } from "react-redux";
+import { signIn, signOut } from "../store/user/actions";
 
 
-export const Router = () => (
+export const Router = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if(user) {
+        dispatch(signIn())
+      }else {
+        dispatch(signOut())
+      }
+    })
+  },[])
+  return (
   <BrowserRouter>
     <Container className="mt-4">
       <ul>
@@ -28,15 +46,22 @@ export const Router = () => (
         </Button>
       </ul>
       <Routes>
-        <Route path='/' element={<Home />} />
+
+        <Route path='/' element={ <PublicRoute> <Home /> </PublicRoute> }/>
+        <Route path='/signup' element={ <PublicRoute> <SignUp /> </PublicRoute> }/>
+
         <Route path='articles' element={<Articles />} />
+
         <Route path='chats'>
-          <Route index element={<ChatList />} />
-          <Route path=":chatId"  element={ <Chats /> } />
+          <Route index element={ <PrivateRoute> <ChatList /> </PrivateRoute>} />
+          <Route path=":chatId"  element={ <PrivateRoute> <Chats /> </PrivateRoute>} />
         </Route>
-        <Route path='/user'element={<User />} />
+
+        <Route path='/user'element={ <PrivateRoute> <User /> </PrivateRoute> }/>
         <Route path='*' element={<h2>Sorry!We'r haven't this page</h2>}/>
+
       </Routes>
     </Container>
   </BrowserRouter>
 )
+}
