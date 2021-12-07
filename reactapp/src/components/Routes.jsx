@@ -5,7 +5,7 @@ import Chats from "../components/Chats";
 import { Home } from "../components/Home";
 import { User } from "../components/User";
 import Button from 'react-bootstrap/Button';
-import Container from "react-bootstrap/esm/Container";
+import Container from "react-bootstrap/Container";
 import { ChatList } from "../components/ChatList";
 import { Articles } from "./Articles";
 import { PublicRoute } from "./PublicRoute";
