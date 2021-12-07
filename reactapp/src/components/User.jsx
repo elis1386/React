@@ -1,17 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react"
 import{useSelector, useDispatch,} from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/esm/Container"
 import { toggleCheckbox } from "../store/user/actions"
+import { logOut } from "../services/firebase";
 
 export const User = () => {
     const checkboxValue = useSelector(state => state.checkbox)
     const dispatch = useDispatch()
 
+  
+
     const handleChange = () => {
        dispatch(toggleCheckbox)
     }
+    
+    const handleLogOutClick = async () => {
+      try {
+        await logOut();
+      } catch (err) {
+        console.log(err);
+      }
+   }
 
     return (
     <Container className="mt-4">
@@ -28,6 +39,7 @@ export const User = () => {
           <Button variant="danger">Delete</Button>
         </Card.Body>
       </Card> 
+    <Button variant="outline-warning" className="mt-4" onClick={handleLogOutClick}>Sign out</Button>
     </Container> 
     )    
 }
