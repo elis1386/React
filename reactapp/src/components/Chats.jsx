@@ -10,21 +10,22 @@ import {  Navigate, useParams  } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectMessages } from '../store/messages/selectors';
 import {  addMessageWithReply } from '../store/messages/actions';
+import { push } from 'firebase/database';
+import { getChatMsgsListRefId, getChatMsgsRefId } from '../services/firebase';
 
 
-
-
-function Chats() {
+function Chats({msgs}) {
   const {chatId} = useParams()
   const messages = useSelector(selectMessages)
   const dispatch = useDispatch()
 
 
   const handleSendMessage = useCallback((newMessage) => {
-    dispatch(addMessageWithReply(chatId, newMessage))  
+    // dispatch(addMessageWithReply(chatId, newMessage))
+    push(getChatMsgsListRefId(chatId), newMessage)  
   },[chatId])
 
-  if (!messages[chatId]){
+  if (!msgs[chatId]){
     return <Navigate replace to='/chats' />
   }
 
@@ -35,7 +36,7 @@ function Chats() {
         <ChatList />
         </Col>
         <Col sm={6}>
-           <MessagesList messages={messages[chatId]} />
+           <MessagesList messages={msgs[chatId]} />
            <Addform  onSendMessage={handleSendMessage}/>
         </Col>
       </Row>

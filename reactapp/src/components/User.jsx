@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import{useSelector, useDispatch,} from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button"
@@ -10,9 +10,12 @@ export const User = () => {
     const checkboxValue = useSelector(state => state.checkbox)
     const dispatch = useDispatch()
 
+  
+
     const handleChange = () => {
        dispatch(toggleCheckbox)
     }
+    
     const handleLogOutClick = async () => {
       try {
         await logOut();

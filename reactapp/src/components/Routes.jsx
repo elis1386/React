@@ -11,23 +11,37 @@ import { Articles } from "./Articles";
 import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
 import { SignUp } from "./SignUp";
-import { useEffect } from "react";
-import { auth } from "../services/firebase";
+import { useEffect, useState } from "react";
+import { auth, messagesRef } from "../services/firebase";
 import { useDispatch } from "react-redux";
 import { signIn, signOut } from "../store/user/actions";
+import { onValue } from "firebase/database";
 
 
 export const Router = () => {
   const dispatch = useDispatch()
+  const [msgs, setMsgs] = useState({})
+
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
       if(user) {
         dispatch(signIn())
       }else {
         dispatch(signOut())
       }
     })
+    return () => unsubscribe()
   },[])
+useEffect(() => {
+  onValue(messagesRef, (snapshot) => {
+    const newMsgs = {}
+    snapshot.forEach((chatMsgsSnap) => {
+      newMsgs[chatMsgsSnap.key] = Object.values(chatMsgsSnap.val().messageList || [])
+    })
+    setMsgs(newMsgs)
+  })
+},[])
+
   return (
   <BrowserRouter>
     <Container className="mt-4">
@@ -54,7 +68,7 @@ export const Router = () => {
 
         <Route path='chats'>
           <Route index element={ <PrivateRoute> <ChatList /> </PrivateRoute>} />
-          <Route path=":chatId"  element={ <PrivateRoute> <Chats /> </PrivateRoute>} />
+          <Route path=":chatId"  element={ <PrivateRoute> <Chats msgs={msgs}/> </PrivateRoute>} />
         </Route>
 
         <Route path='/user'element={ <PrivateRoute> <User /> </PrivateRoute> }/>
