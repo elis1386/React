@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import{useSelector, useDispatch,} from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import Button from "react-bootstrap/Button"
-import Container from "react-bootstrap/esm/Container"
+import Container from "react-bootstrap/Container"
 import { toggleCheckbox } from "../store/user/actions"
 import { logOut } from "../services/firebase";
 
